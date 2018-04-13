@@ -150,13 +150,10 @@ void FastText::saveModel() {
   } else {
     fn += ".bin";
   }
-  saveModel(fn);
-}
 
-void FastText::saveModel(const std::string path) {
-  std::ofstream ofs(path, std::ofstream::binary);
+  std::ofstream ofs(fn, std::ofstream::binary);
   if (!ofs.is_open()) {
-    throw std::invalid_argument(path + " cannot be opened for saving!");
+    throw std::invalid_argument(fn + " cannot be opened for saving!");
   }
   signModel(ofs);
   args_->save(ofs);
@@ -177,6 +174,16 @@ void FastText::saveModel(const std::string path) {
   }
 
   ofs.close();
+}
+
+void FastText::saveModel(const std::string path) {
+  args_->output = path;
+  saveModel();
+}
+
+void FastText::saveVectors(const std::string path) {
+  args_->output = path;
+  saveVectors();
 }
 
 void FastText::loadModel(const std::string& filename) {

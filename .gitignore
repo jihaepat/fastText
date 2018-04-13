@@ -7,3 +7,7 @@ fasttext
 result
 
 .idea/
+.python-version
+build/
+*.egg-info
+*.egg
